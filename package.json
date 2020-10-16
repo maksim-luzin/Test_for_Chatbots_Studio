@@ -1,0 +1,18 @@
+{
+  "name": "store",
+  "version": "1.0.0",
+  "description": "For chatbots studio.",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maksim-luzin/Test_for_Chatbots_Studio.git"
+  },
+  "keywords": [
+    "store",
+    "test_task",
+    "bakend",
+    "express"
+  ],
+  "author": "Maksim Luzin",
+  "license": "MIT"
+}
