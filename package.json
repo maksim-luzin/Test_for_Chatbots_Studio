@@ -16,8 +16,18 @@
   "author": "Maksim Luzin",
   "license": "MIT",
   "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.1",
+    "@babel/plugin-transform-modules-commonjs": "^7.12.1",
+    "@babel/plugin-transform-runtime": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/register": "^7.12.1",
     "eslint": "^7.2.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.21.2"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.12.1",
+    "core-js": "^3.6.5"
   }
 }
