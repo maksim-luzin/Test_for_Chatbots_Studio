@@ -2,6 +2,7 @@ import { Router } from 'express';
 import * as productController from '../controllers/productController';
 import adminMiddleware from '../middlewares/adminMiddleware';
 import createProductValidationMiddleware from '../middlewares/createProductValidationMiddleware';
+import updateProductValidationMiddleware from '../middlewares/updateProductValidationMiddleware';
 
 const router = Router();
 
@@ -20,6 +21,7 @@ router
       .catch(next))
   .put('/:id',
     adminMiddleware,
+    updateProductValidationMiddleware,
     (req, res, next) => productController.updateProductById(req.params.id, req.body)
       .then(product => res.send(product))
       .catch(next))
