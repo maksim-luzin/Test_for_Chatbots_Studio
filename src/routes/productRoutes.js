@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import * as productController from '../controllers/productController';
 import adminMiddleware from '../middlewares/adminMiddleware';
+import createProductValidationMiddleware from '../middlewares/createProductValidationMiddleware';
 
 const router = Router();
 
@@ -13,12 +14,15 @@ router
     .catch(next))
   .post('/',
     adminMiddleware,
+    createProductValidationMiddleware,
     (req, res, next) => productController.addProduct(req.body)
       .then(id => res.send(id))
       .catch(next))
-  .put('/:id', adminMiddleware, (req, res, next) => productController.updateProductById(req.params.id, req.body)
-    .then(product => res.send(product))
-    .catch(next))
+  .put('/:id',
+    adminMiddleware,
+    (req, res, next) => productController.updateProductById(req.params.id, req.body)
+      .then(product => res.send(product))
+      .catch(next))
   .delete('/:id', adminMiddleware, (req, res, next) => productController.deleteProductById(req.params.id)
     .then(() => res.send())
     .catch(next));
