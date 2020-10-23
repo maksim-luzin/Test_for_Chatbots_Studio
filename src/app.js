@@ -1,8 +1,12 @@
 import express from 'express';
+import passport from 'passport';
 import sequelize from './db/connection';
 import env from './env';
 
 import routes from './routes';
+import authorizationMiddleware from './middlewares/authorizationMiddleware';
+import routesWhiteList from './config/routesWhiteListConfig';
+import './config/passportConfig';
 import errorHandlerMiddleware from './middlewares/errorHandlerMiddleware';
 
 const app = express();
@@ -20,6 +24,9 @@ sequelize
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(passport.initialize());
+
+app.use('/api/', authorizationMiddleware(routesWhiteList));
 
 routes(app);
 
