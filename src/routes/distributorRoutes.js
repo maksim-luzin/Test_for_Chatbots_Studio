@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import * as distributorController from '../controllers/distributorController';
+import adminMiddleware from '../middlewares/adminMiddleware';
 
 const router = Router();
 
@@ -10,13 +11,13 @@ router
   .get('/:id', (req, res, next) => distributorController.getAllProductsByDistributorId(req.params.id)
     .then(products => res.send(products))
     .catch(next))
-  .post('/', (req, res, next) => distributorController.addDistributor(req.body)
+  .post('/', adminMiddleware, (req, res, next) => distributorController.addDistributor(req.body)
     .then(id => res.send(id))
     .catch(next))
-  .put('/:id', (req, res, next) => distributorController.updateDistributorById(req.params.id, req.body)
+  .put('/:id', adminMiddleware, (req, res, next) => distributorController.updateDistributorById(req.params.id, req.body)
     .then(() => res.send())
     .catch(next))
-  .delete('/:id', (req, res, next) => distributorController.deleteDistributorById(req.params.id)
+  .delete('/:id', adminMiddleware, (req, res, next) => distributorController.deleteDistributorById(req.params.id)
     .then(() => res.send())
     .catch(next));
 
