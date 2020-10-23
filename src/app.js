@@ -2,6 +2,8 @@ import express from 'express';
 import sequelize from './db/connection';
 import env from './env';
 
+import routes from './routes';
+
 const app = express();
 
 sequelize
@@ -14,6 +16,11 @@ sequelize
     // eslint-disable-next-line no-console
     console.error('Unable to connect to the database:', err);
   });
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+routes(app);
 
 const port = process.env.NODE_ENV === 'production'
   ? process.env.PORT
