@@ -3,6 +3,7 @@ import sequelize from './db/connection';
 import env from './env';
 
 import routes from './routes';
+import errorHandlerMiddleware from './middlewares/errorHandlerMiddleware';
 
 const app = express();
 
@@ -21,6 +22,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 routes(app);
+
+app.use(errorHandlerMiddleware);
 
 const port = process.env.NODE_ENV === 'production'
   ? process.env.PORT
